@@ -1,0 +1,40 @@
+test_info:
+  test_name: "PDN Load Transient Test"
+  operator: "Automation"
+  station_id: "ATS-01"
+  board_part_number: "XYZ-PDN-REV-A"
+  board_serial_number: "SN-001"
+
+acceptance_criteria:
+  voltage_dip_max_mV: 120.0
+  voltage_overshoot_max_mV: 120.0
+  settling_time_max_us: 150.0
+  ripple_max_mVpp: 30.0
+
+instrumentation:
+  scope:
+    resource: "TCPIP0::192.168.1.100::inst0::INSTR"
+    channel_voltage: 1
+    channel_trigger: 2
+    horizontal_scale_s: 0.0001
+    sample_rate_sps: 100000000
+  electronic_load:
+    resource: "TCPIP0::192.168.1.101::inst0::INSTR"
+
+rails:
+  - name: "3.3V"
+    nominal_voltage_V: 3.3
+    load_profile:
+      low_current_A: 0.2
+      high_current_A: 1.2
+      rise_time_us: 5.0
+      dwell_time_us: 500.0
+      period_us: 1000.0
+      cycles_per_capture: 10
+    captures: 10
+
+output:
+  base_dir: "results"
+  csv_file: "measurements.csv"
+  waveform_dir: "waveforms"
+  report_file: "reports/test_report.md"
