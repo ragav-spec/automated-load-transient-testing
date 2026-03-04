@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "load-transient-automation"
+version = "0.1.0"
+description = "Automated load transient test framework using SCPI/PyVISA"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Validation Team" }]
+dependencies = [
+  "pyvisa>=1.14.1",
+  "pyvisa-py>=0.7.2",
+  "PyYAML>=6.0.1",
+  "numpy>=1.26.4",
+  "pandas>=2.2.2",
+  "Jinja2>=3.1.4",
+]
+
+[project.scripts]
+load-transient-test = "load_transient_automation.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
